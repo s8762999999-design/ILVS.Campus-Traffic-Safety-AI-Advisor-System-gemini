@@ -17,97 +17,62 @@
         button { background-color: #2ecc71; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; transition: background 0.3s; margin-top: 10px; }
         button:hover { background-color: #27ae60; }
         
-        /* 海報視覺專用樣式 */
-       .poster-output { 
-            display: none; 
-            margin-top: 20px; 
+        /* 隱藏預覽區塊，點擊後顯示 */
+        #previewSection { display: none; margin-top: 20px; }
+
+        /* 海報線框架構專用樣式 */
+       .wireframe-poster { 
             background-color: #1A1A1A; 
             border-radius: 8px; 
             padding: 40px 30px; 
-            text-align: center; 
             color: white; 
-            position: relative; 
             box-shadow: 0 10px 25px rgba(0,0,0,0.4); 
-            overflow: hidden; 
+            font-family: 'Arial Black', '微軟正黑體', sans-serif;
+            margin-bottom: 30px;
         }
-       .poster-output::before { 
-            content: ""; 
-            position: absolute; 
-            top: 0; left: 0; right: 0; 
-            height: 8px; 
-            background: #FFFF00; 
+       .wf-zone {
+            border: 2px dashed #666;
+            padding: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            border-radius: 4px;
         }
-       .poster-tag { 
-            background-color: #FF3333; 
-            color: white; 
-            display: inline-block; 
-            padding: 6px 16px; 
-            font-size: 18px; 
-            font-weight: bold; 
-            border-radius: 4px; 
-            margin-bottom: 25px; 
+       .wf-label {
+            position: absolute;
+            top: -12px;
+            left: 15px;
+            background: #1A1A1A;
+            color: #2ecc71;
+            font-size: 12px;
+            padding: 0 8px;
+            font-family: monospace;
             letter-spacing: 1px;
         }
-       .poster-title { 
-            font-size: 52px; 
-            font-weight: 900; 
-            color: #FFFF00; 
-            margin: 0; 
-            line-height: 1.1; 
-            letter-spacing: 2px; 
-            font-family: 'Arial Black', '微軟正黑體', sans-serif;
+       .wf-zone.title-zone { border-color: #FFFF00; }
+       .wf-zone.title-zone.wf-label { color: #FFFF00; }
+       .wf-zone.image-zone { border-color: #3498db; background: rgba(52, 152, 219, 0.05); height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+       .wf-zone.image-zone.wf-label { color: #3498db; }
+       .wf-zone.action-zone { border-color: #FF3333; }
+       .wf-zone.action-zone.wf-label { color: #FF3333; }
+
+       .wf-tag { background: #FF3333; color: #FFF; display: inline-block; padding: 4px 12px; font-size: 14px; margin-bottom: 15px; border-radius: 2px; }
+       .wf-title { font-size: 48px; color: #FFFF00; margin: 0 0 10px 0; line-height: 1.1; letter-spacing: 2px; }
+       .wf-subtitle { font-size: 32px; color: #FFFFFF; margin: 0; line-height: 1.2; }
+       .wf-action-text { font-size: 24px; color: #FFF; margin: 0; }
+       .wf-action-sub { font-size: 16px; color: #AAA; margin-top: 8px; font-weight: normal; font-family: 'Segoe UI', sans-serif; }
+
+        /* 詳細規格表樣式 */
+       .spec-board {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-left: 5px solid #2ecc71;
+            border-radius: 4px;
+            padding: 20px;
         }
-       .poster-subtitle { 
-            font-size: 42px; 
-            font-weight: 900; 
-            color: #FFFFFF; 
-            margin: 10px 0 30px 0; 
-            line-height: 1.1; 
-            letter-spacing: 2px; 
-            font-family: 'Arial Black', '微軟正黑體', sans-serif;
-        }
-       .poster-image-placeholder { 
-            background-color: #2A2A2A; 
-            border: 2px dashed #555; 
-            height: 250px; 
-            border-radius: 8px; 
-            display: flex; 
-            flex-direction: column;
-            align-items: center; 
-            justify-content: center; 
-            color: #aaa; 
-            margin-bottom: 30px; 
-            font-size: 15px; 
-            line-height: 1.5;
-        }
-       .poster-action-box { 
-            background: #222; 
-            padding: 20px; 
-            border-left: 8px solid #FFFF00; 
-            text-align: left; 
-            margin-bottom: 20px; 
-            border-radius: 0 4px 4px 0;
-        }
-       .poster-action-title { 
-            color: #FFFF00; 
-            font-size: 20px; 
-            font-weight: bold; 
-            margin-bottom: 5px; 
-        }
-       .poster-action-text { 
-            font-size: 22px; 
-            font-weight: bold; 
-            color: #FFF; 
-        }
-       .poster-footer { 
-            font-size: 14px; 
-            color: #777; 
-            text-align: right; 
-            border-top: 1px solid #333; 
-            padding-top: 15px; 
-            margin-top: 20px; 
-            letter-spacing: 1px;
-        }
+       .spec-board h3 { margin-top: 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+       .spec-table { width: 100%; border-collapse: collapse; font-size: 14px; }
+       .spec-table th,.spec-table td { padding: 12px 10px; border-bottom: 1px solid #eee; text-align: left; }
+       .spec-table th { width: 25%; color: #34495e; background-color: #f9f9f9; font-weight: bold; }
     </style>
 </head>
 <body>
@@ -136,13 +101,66 @@
             <input type="text" id="envContext" value="宜蘭常有豪大雨、視線不佳、學校旁有寬闊且車速快的省道幹道">
         </div>
         <div class="form-group">
-            <label>校園照片或動線痛點 (描述)：</label>
-            <textarea id="painPoints" rows="3">校園機車棚出口常與步行學生交織，且青少年常因同儕行為影響而有超速危險駕駛行為。</textarea>
+            <label>校園動線痛點 (描述)：</label>
+            <textarea id="painPoints" rows="3">青少年常因同儕行為影響而有超速與雙載搶快行為，雨天極易煞車打滑。</textarea>
         </div>
-        <button onclick="generatePoster()">自動生成宣導海報視覺</button>
+        <button onclick="generatePosterSpec()">自動生成海報線框與規格</button>
 
-        <h2>3. 輸出格式預覽 (海報視覺樣式)</h2>
-        <div id="posterOutput" class="poster-output"></div>
+        <div id="previewSection">
+            <h2>3. 輸出格式預覽 (海報大制線框架構與規格)</h2>
+            
+            <div class="wireframe-poster">
+                <div class="wf-zone title-zone">
+                    <span class="wf-label">Zone 1: 主標題區 (Typography)</span>
+                    <div class="wf-tag" id="dynamicSchoolTag">⚠️ 宜蘭高商 氣候肇事預警</div>
+                    <h3 class="wf-title">宜蘭雨天輪易滑</h3>
+                    <h3 class="wf-subtitle">煞車分段命保下</h3>
+                </div>
+
+                <div class="wf-zone image-zone">
+                    <span class="wf-label">Zone 2: 核心情境圖像區 (Image Placeholder - 佔比 60%)</span>
+                    <div style="font-size: 48px; margin-bottom: 10px;">📸</div>
+                    <div style="color: #bbb; max-width: 80%;">
+                        <strong>[ AI 圖像生成提示詞 ]</strong><br>
+                        A cinematic eye-level shot of a wet asphalt road in Yilan during heavy rain. The focus is on a motorcycle's glowing red brake lights reflecting intensely on the slippery dark ground. High contrast, warning atmosphere, hyper-realistic.
+                    </div>
+                </div>
+
+                <div class="wf-zone action-zone">
+                    <span class="wf-label">Zone 3: 行動指令與情感訴求區 (Call to Action)</span>
+                    <h4 class="wf-action-text">雨天防打滑：切勿一次扣死煞車，請採「分段點放」！</h4>
+                    <div class="wf-action-sub">同儕安全準則：雙載不搶快，把命顧好才是最帥的表現。</div>
+                </div>
+            </div>
+
+            <div class="spec-board">
+                <h3>📊 海報輸出詳細規格 (Design Spec)</h3>
+                <table class="spec-table">
+                    <tbody>
+                        <tr>
+                            <th>實體尺寸與版面</th>
+                            <td>建議 <strong>A1</strong> (594×841mm) 張貼於機車棚與大門川堂；數位版 1080×1920px 供校園 IG 限動使用。</td>
+                        </tr>
+                        <tr>
+                            <th>版面配置比例</th>
+                            <td>遵循一秒吸睛法則：<strong>圖像佔比 60%</strong>、<strong>文字佔比 30%</strong>、<strong>強制留白 10%</strong>。採用由左至右、由上至下的 Z 字型視覺掃視動線。</td>
+                        </tr>
+                        <tr>
+                            <th>字體與字級 (Typography)</th>
+                            <td>主標題 ≥ <strong>120 pt</strong> (採特粗無襯線體，如 Noto Sans Black)，創造極高視覺層級；副標/行動指令 50-80 pt；內文單行間距。</td>
+                        </tr>
+                        <tr>
+                            <th>色彩與對比 (Color)</th>
+                            <td>運用明暗對比策略：背景採深灰/藏青 (<strong>#1A1A1A</strong>)，主視覺文字搭配高彩度螢光黃 (<strong>#FFFF00</strong>) 或警示紅 (<strong>#FF3333</strong>)，克服陰雨天視線不佳問題。</td>
+                        </tr>
+                        <tr>
+                            <th>材質建議 (Material)</th>
+                            <td>考量宜蘭常態強降雨與高濕度，實體海報必須採用 <strong>戶外專用合成紙 + 霧面抗 UV/防水膜處理</strong>，避免水痕與反光眩光。</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
 
         <h2>4. 評估指標 (KPIs)</h2>
         <div class="kpi-box">【行為改變與事故率降低指標 (Lagging Indicators)】
@@ -155,39 +173,18 @@
     </div>
 
     <script>
-        function generatePoster() {
-            const posterDiv = document.getElementById('posterOutput');
+        function generatePosterSpec() {
+            // 獲取學校名稱並動態替換標籤
             const schoolName = document.getElementById('schoolName').value |
 
 | "本校";
+            document.getElementById('dynamicSchoolTag').innerText = `⚠️ ${schoolName} 氣候肇事預警`;
             
-            // 替換為海報視覺 HTML 結構
-            posterDiv.innerHTML = `
-                <div class="poster-tag">⚠️ ${schoolName} 氣候肇事預警 ⚠️</div>
-                <h3 class="poster-title">宜蘭雨天輪易滑</h3>
-                <h3 class="poster-subtitle">煞車分段命保下</h3>
-                
-                <div class="poster-image-placeholder">
-                    <span style="color: #fff; font-size: 18px; margin-bottom: 10px;">[ AI 視覺圖像生成區 ]</span>
-                    <span style="max-width: 80%;">Prompt：A cinematic shot of a wide intersection in rainy weather, motorcycle brake lights reflecting on wet asphalt, high contrast, dramatic lighting.</span>
-                </div>
-                
-                <div class="poster-action-box">
-                    <div class="poster-action-title">● 具體防禦行動</div>
-                    <div class="poster-action-text">雨天切勿一次扣死煞車！請採用「分段點放」操作，避免後輪鎖死打滑。</div>
-                </div>
-                
-                <div class="poster-action-box" style="border-left-color: #FF3333;">
-                    <div class="poster-action-title" style="color: #FF3333;">● 情感與同儕訴求</div>
-                    <div class="poster-action-text">雙載不搶快，把命顧好才是最帥的表現。</div>
-                </div>
-                
-                <div class="poster-footer">
-                    守護 ${schoolName} 校園交通安全 ｜ AI 顧問系統自動排版生成
-                </div>
-            `;
+            // 顯示預覽區塊
+            document.getElementById('previewSection').style.display = 'block';
             
-            posterDiv.style.display = 'block';
+            // 視窗平滑滾動至預覽區
+            document.getElementById('previewSection').scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
     </script>
 </body>
