@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>校園交通安全 AI 顧問系統 (Prompt Framework)</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background-color: #f4f7f6; color: #333; line-height: 1.6; padding: 20px; }
+       .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h2 { color: #34495e; margin-top: 30px; }
+       .system-prompt,.kpi-box { background-color: #e8f4f8; padding: 15px; border-left: 5px solid #3498db; border-radius: 4px; white-space: pre-wrap; font-family: monospace; font-size: 14px; }
+       .kpi-box { background-color: #fcf3cf; border-left-color: #f1c40f; }
+       .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; color: #2c3e50; }
+        input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-family: inherit; }
+        button { background-color: #2ecc71; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; width: 100%; font-weight: bold; transition: background 0.3s; }
+        button:hover { background-color: #27ae60; }
+       .json-output { background-color: #282c34; color: #abb2bf; padding: 20px; border-radius: 4px; font-family: 'Courier New', Courier, monospace; overflow-x: auto; display: none; margin-top: 15px; }
+       .json-key { color: #e06c75; }
+       .json-string { color: #98c379; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>校園交通安全 AI 顧問系統</h1>
+
+        <h2>1. System Prompt (系統底層指令)</h2>
+        <div class="system-prompt">你是一位頂尖的「校園交通安全AI顧問」，具備交通管理專家、視覺設計師、教育政策分析師與心理學家四重專業。
+【知識與規則庫】
+1. 嚴格遵循交通部五大守則。
+2. 針對青少年避免「恐懼訴求」，採取「正向行動指令」與「為愛啟程」情感回饋。
+3. 標語公式：[情境前置詞] + [精準動詞] + [具體風險] + [正向行動]。
+4. 海報排版：文字占比小於30%，主標題極大化，採用Z字型閱讀動線與高對比色。</div>
+
+        <h2>2. User Prompt (使用者輸入表單)</h2>
+        <div class="form-group">
+            <label>學校名稱：</label>
+            <input type="text" id="schoolName" value="宜蘭高商">
+        </div>
+        <div class="form-group">
+            <label>學生交通型態：</label>
+            <input type="text" id="transportType" value="機車 60% (含雙載與少部分無照)、自行車 20%、步行 20%">
+        </div>
+        <div class="form-group">
+            <label>在地情境與氣候：</label>
+            <input type="text" id="envContext" value="宜蘭常有豪大雨、視線不佳、學校旁有寬闊且車速快的省道幹道">
+        </div>
+        <div class="form-group">
+            <label>校園照片或動線痛點 (描述)：</label>
+            <textarea id="painPoints" rows="3">校園機車棚出口常與步行學生交織，且青少年常因同儕行為影響而有超速危險駕駛行為。</textarea>
+        </div>
+        <button onclick="generateJSON()">自動生成海報企劃與標語</button>
+
+        <h2>3. 輸出格式預覽 (JSON Output)</h2>
+        <div id="jsonOutput" class="json-output"></div>
+
+        <h2>4. 評估指標 (KPIs)</h2>
+        <div class="kpi-box">【行為改變與事故率降低指標 (Lagging Indicators)】
+- 肇事斑點圖熱區事故下降率：比對張貼後一學期內通報之交通事故件數變化。
+- 特定違規行為矯正率：抽樣觀察學生安全行為（如雨天開大燈、戴妥安全帽）比例提升。
+
+【視覺穿透與記憶留存指標 (Leading Indicators)】
+- 標語 3 秒記憶率測驗：測驗學生看過海報後，能否在 3 秒內精準背出標語或核心動詞。
+- 交通風險自評吻合度：調查學生對「危險路段」的主觀認知是否與真實肇事數據吻合。</div>
+    </div>
+
+    <script>
+        function generateJSON() {
+            const outputDiv = document.getElementById('jsonOutput');
+            const dummyJSON = `{
+  "campus_analysis": {
+    "primary_risk": "省道幹道車速快與號誌搶快側撞風險，以及雨天機車煞車打滑。",
+    "psychological_barrier": "青少年受同儕影響將違規視為追求刺激表現，對純粹恐懼或教條式宣導易產生防衛性迴避。"
+  },
+  "visual_design_spec": {
+    "recommended_size": "A1 / IG 限時動態",
+    "color_palette": {
+      "background": "#1A1A1A (深色霧面防水材質)",
+      "accent": "#FFFF00 (高彩度螢光警示黃)"
+    },
+    "typography": "主標題 ≥ 120 pt (特粗無襯線體)，內文單行間距",
+    "layout_composition": "圖像占比 60%、文字 30%、留白 10%，Z字型掃視動線",
+    "image_prompt": "A cinematic shot of a wide intersection in rainy weather, motorcycle brake lights reflecting on wet asphalt, dramatic lighting."
+  },
+  "slogans": [
+    {
+      "text": "宜蘭雨天輪易滑，煞車分段命保下。",
+      "formula_breakdown": "[宜蘭雨天] + [分段] + [輪易滑] + [保命]",
+      "why_it_works": "提供具體的『分段』動作指令，取代空泛的『減速慢行』，直接解決雨天瞬間扣死煞車導致後輪鎖死的實體風險。"
+    }
+  ],
+  "improvement_suggestions": {
+    "hotspot_strategy": "在機車棚出口強制設置減速帶，並於視線高度張貼高對比色行為矯正海報。",
+    "management_action": "定期實施學生交通風險自評問卷，並結合校園 IG 進行情感訴求（為愛啟程）推播。"
+  }
+}`;
+            
+            // 簡易的 JSON 語法高亮轉換
+            const formattedJSON = dummyJSON.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+                let cls = 'json-string';
+                if (/^"/.test(match)) {
+                    if (/:$/.test(match)) {
+                        cls = 'json-key';
+                    }
+                } else if (/true|false/.test(match)) {
+                    cls = 'json-boolean';
+                } else if (/null/.test(match)) {
+                    cls = 'json-null';
+                }
+                return '<span class="' + cls + '">' + match + '</span>';
+            });
+
+            outputDiv.innerHTML = formattedJSON;
+            outputDiv.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
